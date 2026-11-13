@@ -1,0 +1,45 @@
+# SPARE: Python dependencies for running the notebooks on LUMI (CSC).
+#
+# LUMI GPU nodes use AMD MI250X GPUs, so PyTorch must be a ROCm build.
+# Do not pip install torch from this file. Use CSC's PyTorch module, which
+# already provides a ROCm build of torch, and install the rest on top of it:
+#
+#   module purge
+#   module use /appl/local/csc/modulefiles
+#   module load pytorch
+#   python -m venv --system-site-packages venv-spare
+#   source venv-spare/bin/activate
+#   pip install -r requirements.txt
+#
+# In a batch job, load the same module and activate the same venv, then run:
+#   python -m spare run --dataset HumAID --out-dir runs
+# scripts/lumi_job.sh does all of this as a SLURM job.
+#
+# The code checks torch.cuda.is_available(); on ROCm builds of PyTorch this
+# returns True for AMD GPUs, so no code changes are needed.
+#
+# Model and data are downloaded from the Hugging Face Hub on first use. Point
+# the cache to your project scratch space so it does not fill your home quota:
+#   export HF_HOME=/scratch/<project_id>/$USER/hf_cache
+
+# Model loading and inference (Qwen/Qwen2.5-3B-Instruct)
+transformers==4.46.3
+accelerate==1.1.1
+
+# Datasets (HumAID, CrisisNLP, CrisisLexT26)
+datasets==3.1.0
+requests==2.32.3
+
+# Data handling and evaluation
+numpy==1.26.4
+pandas==2.2.3
+scikit-learn==1.5.2
+tqdm==4.67.1
+
+# Figures (bar charts, confusion matrices, linguistic heatmap)
+matplotlib==3.9.2
+
+# Running the notebooks
+jupyterlab==4.2.5
+ipykernel==6.29.5
+nbconvert==7.16.4

@@ -1,0 +1,31 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "spare"
+version = "1.0.0"
+description = "Sequential Preservation-Aware Ripple Editing for disaster-related social media classification"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "torch>=2.1",
+    "transformers>=4.43",
+    "accelerate",
+    "datasets",
+    "requests",
+    "numpy",
+    "pandas",
+    "scikit-learn",
+    "tqdm",
+    "matplotlib",
+]
+
+[project.optional-dependencies]
+dev = ["pytest"]
+
+[project.scripts]
+spare = "spare.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["spare*"]

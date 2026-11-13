@@ -1,0 +1,21 @@
+# Experiment outputs and caches
+runs/
+figs_out/
+data/
+crisisnlp_raw/
+hf_cache/
+*_run/
+*.pt
+FINAL_WT_MODEL/
+slurm-*.out
+venv-spare/
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ipynb_checkpoints/
+
+# OS
+.DS_Store
